@@ -30,11 +30,20 @@ module.exports = {
                 // para que me tome los .scss o .css
                 test: /\.(s*)css$/,
                 use: [
-                    {loader: MiniCssExtractPlugin.loader},
+                    { loader: MiniCssExtractPlugin.loader },
                     'css-loader',
                     'sass-loader'
                 ]
-            }
+            },
+            {
+                test: /\.(png|gif|jpg)$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: { name: 'assets/[hash].[ext]' },
+                    }
+                ],
+            },
         ],
     },
     plugins: [
