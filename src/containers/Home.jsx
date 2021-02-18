@@ -24,21 +24,20 @@ sin enviamos un array vacio la funcion solo se ejecuta al montar o desmontar el 
 
 */
 const API = "http://127.0.0.2:3000/initalState"
-const App = () => {
+const Home = () => {
   // aqui categorias sera una lista con los nombre de las categorias que tenemos dentro de nuestro json
   // aqui videos
   const [videos, categorias] = useInitialState(API)
 
   console.log(videos, categorias);
-  return (
+  return videos.length === 0 ? <h1>LOADING ...</h1> : (
     <div className="App" >
-      <Header />
       <Search />
       {
         categorias.map(categoria => (
           // videos[categoria] corresponde a cada objeto con su respectiva categoria dentro del json
           videos[categoria].length > 0 && (
-            <Categories key={Math.floor(Math.random() * 10)} title={categoria}>
+            <Categories key={Math.floor(Math.random() * 10000)} title={categoria}>
               <Carousel>
                 {
                   // renderizamos cada objeto (video con sus descripciones) dentro del componente item
@@ -53,9 +52,8 @@ const App = () => {
           )
         ))
       }
-      <Footer></Footer>
     </div >
   )
 };
 
-export default App;
+export default Home;
